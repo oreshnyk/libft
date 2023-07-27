@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oreshetn <oreshetn@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 14:11:06 by oreshetn          #+#    #+#             */
-/*   Updated: 2023/05/16 14:11:17 by oreshetn         ###   ########.fr       */
+/*   Created: 2023/05/30 11:34:09 by oreshetn          #+#    #+#             */
+/*   Updated: 2023/05/30 12:54:42 by oreshetn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*substr;
-	size_t	i;
+	int	len;
+	int	i;
+	int	j;
 
+	if (!s1)
+		return (0);
+	len = ft_strlen(s1);
 	i = 0;
-	if (!s)
-		return (NULL);
-	if (ft_strlen(s) <= start)
-	{
-		len = 0;
-	}
-	else if (start + len >= ft_strlen(s))
-	{
-		len = ft_strlen(s) - start;
-	}
-	substr = (char *)malloc(sizeof(char) * (len + 1));
-	if (!substr)
-		return (NULL);
-	while (i < len)
-	{
-		substr[i] = s[start];
-		start++;
+	j = len - 1;
+	while (i <= len / 2 && ft_strchr(set, s1[i]) != NULL)
 		i++;
-	}
-	substr[i] = '\0';
-	return (substr);
+	while (j >= len / 2 && ft_strchr(set, s1[j]) != NULL)
+		j--;
+	if (i > j)
+		return (ft_strdup(""));
+	len = j - i;
+	return (ft_substr(s1, i, len + 1));
 }
