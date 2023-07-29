@@ -45,7 +45,7 @@ BSRC_OBJ = $(BSRC:.c=.o)
 
 all: $(NAME)
 
-%.o : %.c Makefile
+%.o : %.c ${HEADER} Makefile
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 	@echo "$(GREEN)Compiling $<...$(DEFAULT)"
 

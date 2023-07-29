@@ -6,7 +6,7 @@
 /*   By: oreshetn <oreshetn@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:21:24 by oreshetn          #+#    #+#             */
-/*   Updated: 2023/05/09 17:22:31 by oreshetn         ###   ########.fr       */
+/*   Updated: 2023/07/29 19:39:43 by oreshetn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,19 @@
 void	*ft_calloc(size_t count, size_t size)
 {
 	char	*str;
+	size_t	total_size;
 
-	if (count <= 0 || size <= 0)
-		str = (char *)malloc(1);
+	if (count == 0 || size == 0)
+	{
+		total_size = 1;
+	}
 	else
-		str = (char *)malloc(count * size);
+	{
+		total_size = count * size;
+	}
+	str = (char *)malloc(total_size);
 	if (!str)
 		return (NULL);
-	return (ft_memset(str, 0, count * size));
+	ft_memset(str, 0, total_size);
+	return ((void *)str);
 }
